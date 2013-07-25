@@ -12,7 +12,7 @@ argv = require('optimist')
 
 LOCAL_NICKNAME = argv.nickname
 LOCAL_HOSTNAME = os.hostname()
-SERVER_HOSTNAME = 'localhost'
+SERVER_HOSTNAME = argv.hostname
 SERVER_PORT = argv.port
 
 url = "http://#{SERVER_HOSTNAME}:#{SERVER_PORT}/api/checkin"
