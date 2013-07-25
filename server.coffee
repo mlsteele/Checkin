@@ -72,4 +72,6 @@ app.get '/api/checkin', (req, res) ->
     #{req.url} requires a POST.
   """
 
-app.listen SERVER_PORT
+app.listen SERVER_PORT, ->
+  console.log "server listening on port #{SERVER_PORT}"
+console.log "starting server..."
