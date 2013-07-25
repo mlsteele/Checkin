@@ -1,9 +1,10 @@
 express = require 'express'
 handlebars = require 'handlebars'
+persistence = new (require './persistence').File './checkins.json'
 
 SERVER_PORT = 8127
 
-client_data = {}
+client_data = persistence.load() or {}
 
 app = express()
 app.use express.bodyParser()
@@ -56,6 +57,7 @@ app.post '/api/checkin', (req, res) ->
 
   client_data[remote_nickname] ?= {}
   client_data[remote_nickname][remote_ip] = (new Date).getTime()
+  persistence.save client_data
 
 app.get '/api/checkin', (req, res) ->
   res.send 400, """
