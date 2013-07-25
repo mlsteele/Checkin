@@ -1,8 +1,14 @@
 express = require 'express'
 handlebars = require 'handlebars'
 persistence = new (require './persistence').File './checkins.json'
+argv = require('optimist')
+    .usage('Checkin\n')
+    .demand('p')
+    .alias('p', 'port')
+    .describe('p', 'Port to serve from.')
+    .argv
 
-SERVER_PORT = 8127
+SERVER_PORT = argv.port
 
 client_data = persistence.load() or {}
 
@@ -10,6 +16,7 @@ app = express()
 app.use express.bodyParser()
 
 app.get '/', (req, res) ->
+  console.log "someone viewed checkin data from #{req.connection.remoteAddress}"
   template = handlebars.compile '''
     <h1>Checkins</h1>
     <table border="1">
@@ -52,7 +59,7 @@ app.post '/api/checkin', (req, res) ->
     console.warn "WARN: request missing nickname from #{remote_ip}"
     return res.send 400, "missing required form parameter nickname"
 
-  console.log "[#{remote_ip}] (#{remote_nickname})"
+  console.log "checkin [#{remote_ip}] (#{remote_nickname})"
   res.send "ok, thanks for checking in!\n\r"
 
   client_data[remote_nickname] ?= {}
