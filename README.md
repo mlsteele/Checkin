@@ -3,11 +3,14 @@ Checkin Service
 
 Simple checkin server and client.
 
-Do you move computers around and want to know their IPs. Perhaps so that you can ssh into your forgotten files from abroad? Run the checkin server with
+Do you move computers around and want to know their IPs. Perhaps so that you can ssh into your forgotten files from abroad?
+
+## Setup
+Run the checkin server with
 
     coffee server.coffee -p 8213
 
-For a different port, replace 8213 with anything else.
+For a different port, replace `8213` with anything else.
 
 Then, on each client you want to track, add this (exceedingly long) entry to the clients crontab to run.
 
