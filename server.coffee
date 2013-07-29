@@ -18,22 +18,40 @@ app.use express.bodyParser()
 app.get '/', (req, res) ->
   console.log "someone viewed checkin data from #{req.connection.remoteAddress}"
   template = handlebars.compile '''
+    <style type="text/css">
+      body {
+        font-family: Helvetica;
+      }
+
+      tr.header {
+        background-color: #FFF3BD;
+      }
+
+      td {
+        padding: 0.5em;
+	border: 1px solid #ddd;
+      }
+
+      .mono {
+        font-family: "Courier New", monospace;
+      }
+    </style>
     <h1>Checkins</h1>
-    <table border="1">
-      <tr>
+    <table border="0">
+      <tr class="header">
         <td>nickname</td>
-        <td>ip</td>
-        <td>date</td>
-        <td>utc</td>
-        <td>minutes since</td>
+        <td>IP</td>
+        <td>Minutes Since</td>
+        <td>Date</td>
+        <td>Utc</td>
       </tr>
       {{#reports}}
         <tr>
           <td> {{nickname}} </td>
-          <td> {{ip}} </td>
+          <td class="mono"> {{ip}} </td>
+          <td class="mono"> {{since}} </td>
           <td> {{date}} </td>
-          <td> {{utc}} </td>
-          <td> {{since}} </td>
+          <td class="mono"> {{utc}} </td>
         </tr>
       {{/reports}}
     </table>
