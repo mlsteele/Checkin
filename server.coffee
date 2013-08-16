@@ -67,6 +67,9 @@ app.get '/', (req, res) ->
         utc: date
         since: (((new Date).getTime() - date) / 1000 / 60).toFixed 2
 
+  reports.sort (a, b) ->
+    return b.date - a.date
+
   res.send template reports: reports
 
 app.post '/api/checkin', (req, res) ->
