@@ -3,7 +3,7 @@ Checkin Service
 
 Simple checkin server and client.
 
-Do you move computers around and want to know their IPs. Perhaps so that you can ssh into your forgotten files from abroad?
+Do you move computers around and want to know their IPs? Perhaps so that you can ssh into your forgotten files from abroad?
 
 ## Setup
 Run the checkin server with
