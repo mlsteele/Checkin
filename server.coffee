@@ -93,6 +93,17 @@ app.get '/api/checkin', (req, res) ->
     #{req.url} requires a POST.
   """
 
+app.post '/api/query', (req, res) ->
+  query_nickname = req.body.nickname
+
+  nick_data = client_data[query_nickname]
+  if nick_data?
+    records = ({ip: ip, date: date} for ip, date of nick_data)
+    records.sort (a, b) -> b.date - a.date
+    res.send 200, records[0].ip
+  else
+    res.send 404, "unknown.ip"
+
 app.listen SERVER_PORT, ->
   console.log "server listening on port #{SERVER_PORT}"
 console.log "starting server..."
