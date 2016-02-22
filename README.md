@@ -16,6 +16,10 @@ Then, on each client you want to track, add this (exceedingly long) entry to the
 
     * * * * * /usr/local/bin/node /usr/local/bin/coffee /Users/miles/code/checkin/client.coffee -n computer1 -h your.host.org -p 8213
 
+Actually, just this works.
+
+    * * * * * curl http://your.host.org:8213/api/checkin --data "hostname=computer1&nickname=computer1"
+
 You may want to turn down the frequency of the cron job.
 
 To view a very ugly html representation your checkin information go to
